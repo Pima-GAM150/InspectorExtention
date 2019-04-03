@@ -24,7 +24,7 @@ public class CreateParentObject : EditorWindow
     {
 
         //this is the label for the window
-        GUILayout.Label("Select Objects To Make A New Prefab", EditorStyles.boldLabel);
+        GUILayout.Label("Select Objects To Make A New Parent Object", EditorStyles.boldLabel);
 
         //these are the fields for the parent if it is a 2D object then the children will have matching z
         nameInput = EditorGUILayout.TextField("Name", nameInput);
@@ -68,5 +68,44 @@ public class CreateParentObject : EditorWindow
             EditorSceneManager.MarkAllScenesDirty();
         }
 
+        //////////
+        if (GUILayout.Button("Make Prefab"))
+        {  //Loop through every GameObject in the array above
+            foreach (GameObject gameObject in objectArray)
+            {
+                //Set the path as within the Assets folder, and name it as the GameObject's name with the .prefab format
+                string localPath = "Assets/" + gameObject.name + ".prefab";
+
+                //Check if the Prefab and/or name already exists at the path
+                if (AssetDatabase.LoadAssetAtPath(localPath, typeof(GameObject)))
+                {
+                    //Create dialog to ask if User is sure they want to overwrite existing Prefab
+                    if (EditorUtility.DisplayDialog("Are you sure?",
+                        "The Prefab already exists. Do you want to overwrite it?",
+                        "Yes",
+                        "No"))
+                    //If the user presses the yes button, create the Prefab
+                    {
+                        CreateNew(gameObject, localPath);
+                    }
+                }
+                //If the name doesn't exist, create the new Prefab
+                else
+                {
+                    Debug.Log(gameObject.name + " is not a Prefab, will convert");
+                    CreateNew(gameObject, localPath);
+                }
+            }
+        }
+
+     
+
+    }
+
+    static void CreateNew(GameObject obj, string localPath)
+    {
+        //Create a new Prefab at the path given
+        Object prefab = PrefabUtility.CreatePrefab(localPath, obj);
+        PrefabUtility.ReplacePrefab(obj, prefab, ReplacePrefabOptions.ConnectToPrefab);
     }
 }
