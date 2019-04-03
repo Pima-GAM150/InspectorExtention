@@ -1,0 +1,14 @@
+﻿<Properties StartupConfiguration="{0D5AB598-1A7D-55ED-F39E-5FF1D2CB76D8}|">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Editor/CreateParentObject.cs">
+    <Files>
+      <File FileName="Assets/Editor/CreateParentObject.cs" Line="13" Column="42" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp-Editor PreferredExecutionTarget="Unity.Editor" />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>
