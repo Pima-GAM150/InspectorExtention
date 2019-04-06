@@ -14,7 +14,8 @@ public class CreateParentObject : EditorWindow
 
     GameObject[] selectedObjects { get { return Selection.gameObjects; } }
 
-    [MenuItem("GameObject/Parent Maker")]
+    [ContextMenu("Extentions")]
+    [MenuItem("Extentions/Parent Maker")]
     public static void ShowWindow()
     {
         GetWindow<CreateParentObject>("Parent Maker");
@@ -77,10 +78,10 @@ public class CreateParentObject : EditorWindow
             }
         }
 
-        /*
+        
         if (GUILayout.Button("Make Prefab"))
         {  //Loop through every GameObject in the array above
-            foreach (GameObject gameObject in objectArray)
+            foreach (GameObject gameObject in selectedObjects)
             {
                 //Set the path as within the Assets folder, and name it as the GameObject's name with the .prefab format
                 string localPath = "Assets/" + gameObject.name + ".prefab";
@@ -114,9 +115,9 @@ public class CreateParentObject : EditorWindow
     static void CreateNew(GameObject obj, string localPath)
     {
         //Create a new Prefab at the path given
-        Object prefab = PrefabUtility.CreatePrefab(localPath, obj);
-        PrefabUtility.ReplacePrefab(obj, prefab, ReplacePrefabOptions.ConnectToPrefab);
+        Object prefab = PrefabUtility.SaveAsPrefabAsset(obj, localPath);
+        PrefabUtility.SaveAsPrefabAssetAndConnect(obj, localPath, InteractionMode.UserAction);
     }
-    */
-    }
+    
+    
 }
