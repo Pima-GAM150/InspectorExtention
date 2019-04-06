@@ -6,6 +6,7 @@ public class ObjectFormationMaker : EditorWindow
 {
 
     float distanceFromEachOther = 1;
+    int numberOfLines = 1;
 
     GameObject[] selectedObjects { get { return Selection.gameObjects; } }
 
@@ -22,7 +23,7 @@ public class ObjectFormationMaker : EditorWindow
         //window header
         GUILayout.Label(" Select objects to put into a formation \n Formations are based off the first selected object", EditorStyles.boldLabel);
         distanceFromEachOther = EditorGUILayout.FloatField(distanceFromEachOther);
-
+        numberOfLines = EditorGUILayout.IntField(numberOfLines);
 
         EditorGUILayout.LabelField("Currently Selected : ", EditorStyles.boldLabel);
         foreach (GameObject gameObj in selectedObjects)
@@ -51,6 +52,13 @@ public class ObjectFormationMaker : EditorWindow
             for (int i = 1; i < selectedObjects.Length; i++)
             {//so formations are based off the Y positions in the world
                 selectedObjects[i].transform.position = new Vector3(selectedObjects[i - 1].transform.position.x + distanceFromEachOther, selectedObjects[i - 1].transform.position.y, selectedObjects[i - 1].transform.position.z);
+            }
+
+            for (int i = 1; i < selectedObjects.Length; i++)
+            {//so formations are based off the Y positions in the world
+               
+                    selectedObjects[i].transform.position = new Vector3(selectedObjects[i - 1].transform.position.x + distanceFromEachOther, selectedObjects[i - 1].transform.position.y, selectedObjects[i - 1].transform.position.z);
+                
             }
 
             EditorSceneManager.MarkAllScenesDirty();
