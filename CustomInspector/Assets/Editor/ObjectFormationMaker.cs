@@ -54,12 +54,7 @@ public class ObjectFormationMaker : EditorWindow
                 selectedObjects[i].transform.position = new Vector3(selectedObjects[i - 1].transform.position.x + distanceFromEachOther, selectedObjects[i - 1].transform.position.y, selectedObjects[i - 1].transform.position.z);
             }
 
-            for (int i = 1; i < selectedObjects.Length; i++)
-            {//so formations are based off the Y positions in the world
-               
-                    selectedObjects[i].transform.position = new Vector3(selectedObjects[i - 1].transform.position.x + distanceFromEachOther, selectedObjects[i - 1].transform.position.y, selectedObjects[i - 1].transform.position.z);
-                
-            }
+            for (int )
 
             EditorSceneManager.MarkAllScenesDirty();
         }
