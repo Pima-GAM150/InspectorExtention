@@ -70,10 +70,12 @@ public class CreateParentObject : EditorWindow
                     {
                         gameObj.transform.position = new Vector3(parent.transform.position.x, gameObj.transform.position.y, gameObj.transform.position.z);
                     }
+                    float distance = Vector3.Distance(parent.transform.position, gameObj.transform.position);
+                    gameObj.transform.position = new Vector3(parent.transform.position.x + distance, gameObj.transform.position.y + distance, parent.transform.position.z + distance);
+
                 }
 
-                parent.transform.position = new Vector3(parent.GetComponentInChildren<Transform>().position.x, parent.GetComponentInChildren<Transform>().position.y, parent.GetComponentInChildren<Transform>().position.z);
-
+                
                 EditorSceneManager.MarkAllScenesDirty();
             }
             Undo.RegisterCreatedObjectUndo(parent, "Create Parent");
