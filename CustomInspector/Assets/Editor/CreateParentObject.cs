@@ -45,37 +45,38 @@ public class CreateParentObject : EditorWindow
         }
 
 
-
+        EditorGUILayout.BeginHorizontal();
 
         if (GUILayout.Button("Make Parent"))
         {
 
-            GameObject prefab = new GameObject(nameInput);
+            GameObject parent = new GameObject(nameInput);
 
             if (selectedObjects != null)
             {
                 foreach (GameObject gameObj in selectedObjects)
                 {
-                    gameObj.transform.SetParent(prefab.transform);
+                    gameObj.transform.SetParent(parent.transform);
 
                     if (sameZPlane)
                     {
-                        gameObj.transform.position = new Vector3(gameObj.transform.position.x, gameObj.transform.position.y, prefab.transform.position.z);
+                        gameObj.transform.position = new Vector3(gameObj.transform.position.x, gameObj.transform.position.y, parent.transform.position.z);
                     }
                     if (sameYPlane)
                     {
-                        gameObj.transform.position = new Vector3(gameObj.transform.position.x, prefab.transform.position.y, gameObj.transform.position.z);
+                        gameObj.transform.position = new Vector3(gameObj.transform.position.x, parent.transform.position.y, gameObj.transform.position.z);
                     }
                     if (sameXPlane)
                     {
-                        gameObj.transform.position = new Vector3(prefab.transform.position.x, gameObj.transform.position.y, gameObj.transform.position.z);
+                        gameObj.transform.position = new Vector3(parent.transform.position.x, gameObj.transform.position.y, gameObj.transform.position.z);
                     }
                 }
 
-                prefab.transform.position = new Vector3(prefab.GetComponentInChildren<Transform>().position.x, prefab.GetComponentInChildren<Transform>().position.y, prefab.GetComponentInChildren<Transform>().position.z);
+                parent.transform.position = new Vector3(parent.GetComponentInChildren<Transform>().position.x, parent.GetComponentInChildren<Transform>().position.y, parent.GetComponentInChildren<Transform>().position.z);
 
                 EditorSceneManager.MarkAllScenesDirty();
             }
+            Undo.RegisterCreatedObjectUndo(parent, "Create Parent");
         }
 
         
@@ -106,9 +107,11 @@ public class CreateParentObject : EditorWindow
                     CreateNew(gameObject, localPath);
                 }
             }
+
+            
         }
 
-     
+        EditorGUILayout.EndHorizontal();
 
     }
 
@@ -117,6 +120,8 @@ public class CreateParentObject : EditorWindow
         //Create a new Prefab at the path given
         Object prefab = PrefabUtility.SaveAsPrefabAsset(obj, localPath);
         PrefabUtility.SaveAsPrefabAssetAndConnect(obj, localPath, InteractionMode.UserAction);
+
+        
     }
     
     

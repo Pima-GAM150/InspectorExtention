@@ -48,13 +48,17 @@ public class ObjectFormationMaker : EditorWindow
 
         if (GUILayout.Button("Horizontal Line on X Axis"))
         {
+            GameObject[,] formation = new GameObject[numberOfLines, selectedObjects.Length/numberOfLines];
+
 
             for (int i = 1; i < selectedObjects.Length; i++)
             {//so formations are based off the Y positions in the world
-                selectedObjects[i].transform.position = new Vector3(selectedObjects[i - 1].transform.position.x + distanceFromEachOther, selectedObjects[i - 1].transform.position.y, selectedObjects[i - 1].transform.position.z);
+                selectedObjects[i].transform.position = new Vector3(selectedObjects[i - 1].transform.position.x+distanceFromEachOther, selectedObjects[i - 1].transform.position.y, selectedObjects[i - 1].transform.position.z);
+           
             }
 
-            for (int )
+
+            //for (int )
 
             EditorSceneManager.MarkAllScenesDirty();
         }
